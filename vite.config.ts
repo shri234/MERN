@@ -4,6 +4,7 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   server: {
-    // If you want to define a custom fallback, configure the root route in the router.
+    host: "0.0.0.0",
+    port: 5173, // Ensure this matches your current port
   },
 });

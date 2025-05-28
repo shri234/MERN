@@ -11,15 +11,25 @@ import {
   CircularProgress,
   Alert,
   Box,
+  TableSortLabel,
 } from "@mui/material";
+import { styled } from "@mui/system";
 import axios from "axios";
+
+// Styled TableRow for alternating row colors
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:hover": {
+    backgroundColor: theme?.palette?.action?.hover || "#f5f5f5",
+  },
+}));
 
 const Dashboard: React.FC = () => {
   const [users, setUsers] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [orderBy, setOrderBy] = useState<keyof any>("name");
+  const [order, setOrder] = useState<"asc" | "desc">("asc");
 
-  // Fetch users from API
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -35,13 +45,27 @@ const Dashboard: React.FC = () => {
     fetchUsers();
   }, []);
 
+  const handleSort = (property: keyof any) => {
+    const isAsc = orderBy === property && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
+    setOrderBy(property);
+    const sortedUsers = [...users].sort((a, b) => {
+      if (isAsc) {
+        return a[property] > b[property] ? 1 : -1;
+      } else {
+        return a[property] < b[property] ? 1 : -1;
+      }
+    });
+    setUsers(sortedUsers);
+  };
+
   if (loading) {
     return (
       <Box
         display="flex"
         justifyContent="center"
         alignItems="center"
-        style={{ minHeight: "100vh", width: "100vw", display: "flex"}}
+        style={{ minHeight: "90vh", width: "100vw", display: "flex" }}
       >
         <CircularProgress />
       </Box>
@@ -54,7 +78,7 @@ const Dashboard: React.FC = () => {
         display="flex"
         justifyContent="center"
         alignItems="center"
-        style={{ minHeight: "100vh", width: "100vw", display: "flex" }}
+        style={{ minHeight: "90vh", width: "100vw", display: "flex" }}
       >
         <Alert severity="error">{error}</Alert>
       </Box>
@@ -62,16 +86,32 @@ const Dashboard: React.FC = () => {
   }
 
   return (
-    <Box sx={{ p: 4 ,width: "100vw",}}>
+    <Box sx={{ p: 4, width: "100vw" }}>
       <Typography variant="h4" gutterBottom>
         Users Dashboard
       </Typography>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} sx={{ boxShadow: 3 }}>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>Name</TableCell>
+              {/* <TableCell sortDirection={orderBy === "id" ? order : false}>
+                {/* <TableSortLabel
+                  active={orderBy === "id"}
+                  direction={orderBy === "id" ? order : "asc"}
+                  onClick={() => handleSort("id")}
+                >
+                  ID
+                </TableSortLabel> */}
+              {/* </TableCell> */} 
+              <TableCell sortDirection={orderBy === "name" ? order : false}>
+                <TableSortLabel
+                  active={orderBy === "name"}
+                  direction={orderBy === "name" ? order : "asc"}
+                  onClick={() => handleSort("name")}
+                >
+                  Name
+                </TableSortLabel>
+              </TableCell>
               <TableCell>Username</TableCell>
               <TableCell>Email</TableCell>
               <TableCell>Mobile Number</TableCell>
@@ -80,15 +120,15 @@ const Dashboard: React.FC = () => {
           </TableHead>
           <TableBody>
             {users.map((user) => (
-              <TableRow key={user.id}>
-                <TableCell>{user.id}</TableCell>
+              <StyledTableRow key={user.id}>
+                {/* <TableCell>{user.id}</TableCell> */}
                 <TableCell>{user.name}</TableCell>
                 <TableCell>{user.username}</TableCell>
                 <TableCell>{user.email}</TableCell>
                 <TableCell>{user.mobileNumber}</TableCell>
                 <TableCell>{user.designation}</TableCell>
-              </TableRow>
-            ))} 
+            //   </StyledTableRow>
+            ))}
           </TableBody>
         </Table>
       </TableContainer>
