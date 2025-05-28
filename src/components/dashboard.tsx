@@ -23,7 +23,7 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/dashboard/get");
+        const response = await axios.get("http://52.69.123.182:3000/api/dashboard/get");
         setUsers(response.data.data);
         setLoading(false);
       } catch (err) {
