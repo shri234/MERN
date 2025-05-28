@@ -61,7 +61,7 @@ const Signup: React.FC = () => {
 
     try {
       const response = await axios.post(
-        "http://52.69.123.182:3000/api/auth/register",
+        "http://54.64.209.208:3000/api/auth/register",
         sendData
       );
       if (response.status === 200) {
