@@ -127,7 +127,7 @@ const Dashboard: React.FC = () => {
                 <TableCell>{user.email}</TableCell>
                 <TableCell>{user.mobileNumber}</TableCell>
                 <TableCell>{user.designation}</TableCell>
-            //   </StyledTableRow>
+              </StyledTableRow>
             ))}
           </TableBody>
         </Table>
