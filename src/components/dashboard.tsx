@@ -13,7 +13,7 @@ import {
   Box,
   TableSortLabel,
 } from "@mui/material";
-import { styled } from "@mui/system";
+import {  styled } from "@mui/system";
 import axios from "axios";
 
 // Styled TableRow for alternating row colors
@@ -86,13 +86,13 @@ const Dashboard: React.FC = () => {
   }
 
   return (
-    <Box sx={{ p: 4, width: "100vw" }}>
-      <Typography variant="h4" gutterBottom>
+    <Box sx={{ p: 20, width: "80vw", alignContent:"center" }}>
+      <Typography variant="h4" align="center" fontWeight="bold" color="brown" gutterBottom>
         Users Dashboard
       </Typography>
-      <TableContainer component={Paper} sx={{ boxShadow: 3 }}>
+      <TableContainer component={Paper} sx={{ boxShadow: 3, alignContent:"center",alignItems:"center" }}>
         <Table>
-          <TableHead>
+          <TableHead  >
             <TableRow>
               {/* <TableCell sortDirection={orderBy === "id" ? order : false}>
                 {/* <TableSortLabel
@@ -103,7 +103,7 @@ const Dashboard: React.FC = () => {
                   ID
                 </TableSortLabel> */}
               {/* </TableCell> */} 
-              <TableCell sortDirection={orderBy === "name" ? order : false}>
+              <TableCell sortDirection={orderBy === "name" ? order : false} sx={{ color: "black", backgroundColor:"lightblue", fontWeight: "bold" }}>
                 <TableSortLabel
                   active={orderBy === "name"}
                   direction={orderBy === "name" ? order : "asc"}
@@ -112,10 +112,10 @@ const Dashboard: React.FC = () => {
                   Name
                 </TableSortLabel>
               </TableCell>
-              <TableCell>Username</TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>Mobile Number</TableCell>
-              <TableCell>Designation</TableCell>
+              <TableCell sx={{ color: "black",backgroundColor:"lightblue", fontWeight: "bold" }}>Username</TableCell>
+              <TableCell sx={{ color: "black",backgroundColor:"lightblue", fontWeight: "bold" }}>Email</TableCell>
+              <TableCell sx={{ color: "black", backgroundColor:"lightblue",fontWeight: "bold" }}>Mobile Number</TableCell>
+              <TableCell sx={{ color: "black", backgroundColor:"lightblue",fontWeight: "bold" }}>Designation</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

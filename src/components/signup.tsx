@@ -93,9 +93,16 @@ const Signup: React.FC = () => {
   return (
     <Grid
       container
-      justifyContent="center"
-      alignItems="center"
-      style={{ minHeight: "80vh", width: "100vw", display: "flex" }}
+  justifyContent="center"
+  alignItems="center"
+  style={{width:"180vh"}}
+  sx={{
+    width: "100%",         // Set width to 100% of the parent
+    height: "100vh",       // Set height to match the viewport height
+    padding: 2,
+    boxSizing: "border-box", // Include padding and border in dimensions
+    // overflow: "hidden",    // Prevent overflow causing scrollbars
+  }}
     >
       <Box
         component="form"
@@ -106,9 +113,10 @@ const Signup: React.FC = () => {
           boxShadow: 3,
           maxWidth: 400,
           backgroundColor: "white",
+          
         }}
       >
-        <Typography variant="h5" component="h1" gutterBottom>
+        <Typography variant="h5" component="h1" fontWeight="bold" align="center" gutterBottom>
           Signup
         </Typography>
 
@@ -183,7 +191,7 @@ const Signup: React.FC = () => {
         />
         <TextField
           fullWidth
-          margin="normal"
+          margin="dense"
           label="Mobile Number"
           name="mobileNumber"
           type="tel"
