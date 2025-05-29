@@ -18,7 +18,7 @@ const Signup: React.FC = () => {
     const naivgate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
-    username: "",
+    // username: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -52,7 +52,7 @@ const Signup: React.FC = () => {
 
     let sendData = {
       name: formData.name,
-      username: formData.username,
+      // username: formData.username,
       email: formData.email,
       password: formData.password,
       mobileNumber: formData.mobileNumber,
@@ -61,14 +61,15 @@ const Signup: React.FC = () => {
 
     try {
       const response = await axios.post(
-        "http://18.181.221.66:3000/api/auth/register",
+        "http://localhost:3000/api/auth/register",
         sendData
       );
+      
       if (response.status === 200) {
         setSuccess("Signup successful! You can now log in.");
         setFormData({
           name: "",
-          username: "",
+          // username: "",
           email: "",
           password: "",
           confirmPassword: "",
@@ -78,6 +79,8 @@ const Signup: React.FC = () => {
         naivgate("/login");
       }
     } catch (err: any) {
+      console.log(err,"err");
+      // console.log(response,"error res");
       setError(err.response?.data?.message || "An error occurred. Please try again.");
     }
   };
@@ -97,13 +100,13 @@ const Signup: React.FC = () => {
   alignItems="center"
   style={{width:"180vh"}}
   sx={{
-    width: "100%",         // Set width to 100% of the parent
-    height: "100vh",       // Set height to match the viewport height
+    width: "100%",         
+    height: "100vh",       
     padding: 2,
-    boxSizing: "border-box", // Include padding and border in dimensions
-    // overflow: "hidden",    // Prevent overflow causing scrollbars
+    boxSizing: "border-box",
   }}
     >
+        
       <Box
         component="form"
         onSubmit={handleSubmit}
@@ -132,7 +135,7 @@ const Signup: React.FC = () => {
           onChange={handleChange}
           required
         />
-        <TextField
+        {/* <TextField
           fullWidth
           margin="normal"
           label="Username"
@@ -140,7 +143,7 @@ const Signup: React.FC = () => {
           value={formData.username}
           onChange={handleChange}
           required
-        />
+        /> */}
         <TextField
           fullWidth
           margin="normal"
@@ -160,6 +163,12 @@ const Signup: React.FC = () => {
           value={formData.password}
           onChange={handleChange}
           required
+          error={formData.password.length > 0 && formData.password.length < 8} 
+          helperText={
+            formData.password.length > 0 && formData.password.length < 8
+              ? "Password must be at least 8 characters"
+            : ""
+            }
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
@@ -189,16 +198,23 @@ const Signup: React.FC = () => {
             ),
           }}
         />
-        <TextField
-          fullWidth
-          margin="dense"
-          label="Mobile Number"
-          name="mobileNumber"
-          type="tel"
-          value={formData.mobileNumber}
-          onChange={handleChange}
-          required
-        />
+      <TextField
+  fullWidth
+  margin="dense"
+  label="Mobile Number"
+  name="mobileNumber"
+  type="tel"
+  value={formData.mobileNumber}
+  onChange={handleChange}
+  required
+  error={!!(formData.mobileNumber && formData.mobileNumber.length !== 10)}
+  helperText={
+    formData.mobileNumber && formData.mobileNumber.length !== 10
+      ? "Mobile number must be exactly 10 digits"
+      : ""
+  }
+/>
+
         <TextField
           fullWidth
           margin="normal"
@@ -206,7 +222,7 @@ const Signup: React.FC = () => {
           name="designation"
           value={formData.designation}
           onChange={handleChange}
-          required
+        
         />
 
         <Button type="submit" fullWidth variant="contained" sx={{ mt: 2 }}>

@@ -33,7 +33,7 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get("http://18.181.221.66:3000/api/dashboard/get");
+        const response = await axios.get("http://localhost:3000/api/dashboard/get");
         setUsers(response.data.data);
         setLoading(false);
       } catch (err) {
@@ -112,7 +112,7 @@ const Dashboard: React.FC = () => {
                   Name
                 </TableSortLabel>
               </TableCell>
-              <TableCell sx={{ color: "black",backgroundColor:"lightblue", fontWeight: "bold" }}>Username</TableCell>
+              {/* <TableCell sx={{ color: "black",backgroundColor:"lightblue", fontWeight: "bold" }}>Username</TableCell> */}
               <TableCell sx={{ color: "black",backgroundColor:"lightblue", fontWeight: "bold" }}>Email</TableCell>
               <TableCell sx={{ color: "black", backgroundColor:"lightblue",fontWeight: "bold" }}>Mobile Number</TableCell>
               <TableCell sx={{ color: "black", backgroundColor:"lightblue",fontWeight: "bold" }}>Designation</TableCell>
@@ -123,7 +123,7 @@ const Dashboard: React.FC = () => {
               <StyledTableRow key={user.id}>
                 {/* <TableCell>{user.id}</TableCell> */}
                 <TableCell>{user.name}</TableCell>
-                <TableCell>{user.username}</TableCell>
+                {/* <TableCell>{user.username}</TableCell> */}
                 <TableCell>{user.email}</TableCell>
                 <TableCell>{user.mobileNumber}</TableCell>
                 <TableCell>{user.designation}</TableCell>
