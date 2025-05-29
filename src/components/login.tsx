@@ -39,7 +39,7 @@ const Login: React.FC = () => {
         }
         
         try {
-            const response = await axios.post("http://54.64.209.208:3000/api/auth/login", sendData);
+            const response = await axios.post("http://18.181.221.66:3000/api/auth/login", sendData);
             if (response.status === 200) {
                 setSuccess("Signup successful! You can now log in.");
                 setFormData({
