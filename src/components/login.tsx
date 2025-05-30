@@ -57,7 +57,7 @@ const Login: React.FC = () => {
 
         try {
             const response = await axios.post(
-                `${ "http://localhost:3000"}/api/auth/login`, 
+                `${ "http://18.181.221.66:3000"}/api/auth/login`, 
                 {
                     identifier: formData.identifier.trim(),  // Changed from identifier to formData.identifier
                 password: formData.password.trim(),   
